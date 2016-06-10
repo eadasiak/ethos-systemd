@@ -65,7 +65,7 @@ EOT
 # Create directory structure
 mkdir -p /opt/klam/lib /opt/klam/lib64 /etc/ld.so.conf.d
 
-# Klam-ssh requires a shared library to be resident on the host.  these
+# Klam-ssh requires a shared library to be resident on the host.  These
 # steps copy it from the klam-ssh container via a volume mount, then
 # remove the container
 docker create --name klam-ssh "${IMAGE:-adobecloudops/klam-ssh:latest}"
@@ -126,16 +126,16 @@ fi
 cat /etc/ssh/sshd_config
 
 # Change ownership of authorizedkeys_command
-chown root:root /home/core/mesos-systemd/v3/util/authorizedkeys_command.sh
+chown root:root ${SCRIPTDIR}/${VERSION}/util/authorizedkeys_command.sh
 
 # Relocate authorizedkeys_command
-mv /home/core/mesos-systemd/v3/util/authorizedkeys_command.sh /opt/klam/lib
+mv ${SCRIPTDIR}/${VERSION}/util/authorizedkeys_command.sh /opt/klam/lib
 
 # Change ownership of downloadS3
-chown root:root /home/core/mesos-systemd/v3/util/downloadS3.sh
+chown root:root ${SCRIPTDIR}/${VERSION}/util/downloadS3.sh
 
 # Relocate downloadS3.sh
-mv /home/core/mesos-systemd/v3/util/downloadS3.sh /opt/klam/lib
+mv ${SCRIPTDIR}/${VERSION}/util/downloadS3.sh /opt/klam/lib
 
 # Restart SSHD
 systemctl restart sshd.service

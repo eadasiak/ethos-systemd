@@ -16,7 +16,7 @@ sudo cp --dereference ${SCRIPTDIR}/$VERSION/profile.d/${NODE_ROLE}/* /etc/profil
 source $SCRIPTDIR/$VERSION/lib/helpers.sh
 
 # Control tier - must form an etcd2 cluster first
-if [[ "$NODE_ROLE" = "control" ]]; then
+if [[ "$NODE_ROLE" = "control" || "$NODE_ROLE" = "bastion" ]]; then
   sudo ${SCRIPTDIR}/$VERSION/util/etcd2-setup.sh $SCRIPTDIR $VERSION
 fi
 
@@ -65,7 +65,7 @@ function follower-setup() {
 # Check the bootstrap process to see if this node should run the leader scripts
 etcdctl get /bootstrap.service/leader-status
 
-if [[ $? != 0 && "$NODE_ROLE" = "control" ]]; then
+if [[ $? != 0 && ("$NODE_ROLE" = "control" || "$NODE_ROLE" = "bastion") ]]; then
   # The election process follows the following algorithm:
   # 1. A list of all cluster members is obtained
   # 2. IP addresses of all members are filtered and sorted

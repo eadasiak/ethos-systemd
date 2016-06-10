@@ -16,6 +16,7 @@ sudo cp --dereference ${SCRIPTDIR}/$VERSION/profile.d/${NODE_ROLE}/* /etc/profil
 source $SCRIPTDIR/$VERSION/lib/helpers.sh
 
 # Control tier - must form an etcd2 cluster first
+# Bastion tier - etcd2 cluster is separate from control, but also needs to be set up
 if [[ "$NODE_ROLE" = "control" || "$NODE_ROLE" = "bastion" ]]; then
   sudo ${SCRIPTDIR}/$VERSION/util/etcd2-setup.sh $SCRIPTDIR $VERSION
 fi

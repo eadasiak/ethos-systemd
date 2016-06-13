@@ -2,6 +2,8 @@
 
 echo "-------Beginning klam-ssh setup-------"
 
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 AZ=$(curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone)
 REGION=${AZ::-1}
 ROLE_NAME="$(etcdctl get /klam-ssh/config/role-name)"
@@ -126,16 +128,16 @@ fi
 cat /etc/ssh/sshd_config
 
 # Change ownership of authorizedkeys_command
-chown root:root ${SCRIPTDIR}/${VERSION}/util/authorizedkeys_command.sh
+chown root:root $DIR/../../util/authorizedkeys_command.sh
 
 # Relocate authorizedkeys_command
-mv ${SCRIPTDIR}/${VERSION}/util/authorizedkeys_command.sh /opt/klam/lib
+mv $DIR/../../util/authorizedkeys_command.sh /opt/klam/lib
 
 # Change ownership of downloadS3
-chown root:root ${SCRIPTDIR}/${VERSION}/util/downloadS3.sh
+chown root:root $DIR/../../util/downloadS3.sh
 
 # Relocate downloadS3.sh
-mv ${SCRIPTDIR}/${VERSION}/util/downloadS3.sh /opt/klam/lib
+mv $DIR/../../util/downloadS3.sh /opt/klam/lib
 
 # Restart SSHD
 systemctl restart sshd.service

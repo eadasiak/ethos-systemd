@@ -14,6 +14,7 @@ docker pull $(etcd-get /images/gocron-logrotate)
 docker pull $(etcd-get /images/sumologic)
 docker pull $(etcd-get /images/sumologic-syslog)
 docker pull $(etcd-get /images/dd-agent)
+docker pull $(etcd-get /images/klam-ssh)
 
 if [ "${NODE_ROLE}" = "control" ]; then
     docker pull $(etcd-get /images/jenkins)
@@ -37,7 +38,7 @@ fi
 
 if [ "${NODE_ROLE}" = "worker" ]; then
 	export ETCDCTL_PEERS="http://$ETCDCTL_PEERS_ENDPOINT"
-	
+
     docker pull $(etcd-get /images/mesos-slave)
 fi
 

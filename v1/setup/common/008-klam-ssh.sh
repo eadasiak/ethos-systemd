@@ -68,7 +68,7 @@ mkdir -p /opt/klam/lib /opt/klam/lib64 /etc/ld.so.conf.d
 # Klam-ssh requires a shared library to be resident on the host.  These
 # steps copy it from the klam-ssh container via a volume mount, then
 # remove the container
-docker create --name klam-ssh "${IMAGE:-adobecloudops/klam-ssh:latest}"
+docker create --name klam-ssh "${IMAGE}"
 docker cp klam-ssh:/tmp/klam-build/coreos/libnss_ato.so.2 /opt/klam/lib64
 ln -sf /opt/klam/lib64/libnss_ato.so.2 /opt/klam/lib64/libnss_ato.so
 docker rm klam-ssh

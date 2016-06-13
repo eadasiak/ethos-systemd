@@ -1,0 +1,1 @@
+../leader/004-etcd-auth.sh

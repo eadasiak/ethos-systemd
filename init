@@ -119,14 +119,14 @@ function general-units() {
     # skip control- prefixed units on non-control leader nodes (e.g., bastion)
     if [[ $unit =~ ^control ]]; then
       if [[ $NODE_ROLE = control ]]; then
-        echo submit-fleet-unit ${SCRIPTDIR}/$VERSION/fleet/${unit}
-        echo start-fleet-unit ${SCRIPTDIR}/$VERSION/fleet/${unit}
+        submit-fleet-unit ${SCRIPTDIR}/$VERSION/fleet/${unit}
+        start-fleet-unit ${SCRIPTDIR}/$VERSION/fleet/${unit}
       else
         continue
       fi
     else
-      echo submit-fleet-unit ${SCRIPTDIR}/$VERSION/fleet/${unit}
-      echo start-fleet-unit ${SCRIPTDIR}/$VERSION/fleet/${unit}
+      submit-fleet-unit ${SCRIPTDIR}/$VERSION/fleet/${unit}
+      start-fleet-unit ${SCRIPTDIR}/$VERSION/fleet/${unit}
     fi
   done
   echo "-------Done general purpose fleet submissions-------"

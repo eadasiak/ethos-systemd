@@ -4,13 +4,16 @@ echo "-------Beginning klam-ssh setup-------"
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+source /etc/environment || :
+source $DIR/../../lib/helpers.sh
+
 AZ=$(curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone)
 REGION=${AZ::-1}
-ROLE_NAME="$(etcdctl get /klam-ssh/config/role-name)"
-ENCRYPTION_ID="$(etcdctl get /klam-ssh/config/encryption-id)"
-ENCRYPTION_KEY="$(etcdctl get /klam-ssh/config/encryption-key)"
-KEY_LOCATION_PREFIX="$(etcdctl get /klam-ssh/config/key-location-prefix)"
-IMAGE="$(etcdctl get /images/klam-ssh)"
+ROLE_NAME="$(etcd-get /klam-ssh/config/role-name)"
+ENCRYPTION_ID="$(etcd-get /klam-ssh/config/encryption-id)"
+ENCRYPTION_KEY="$(etcd-get /klam-ssh/config/encryption-key)"
+KEY_LOCATION_PREFIX="$(etcd-get /klam-ssh/config/key-location-prefix)"
+IMAGE="$(etcd-get /images/klam-ssh)"
 
 
 case $REGION in

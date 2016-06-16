@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Source the etcd
+if [ -f /etc/profile.d/etcdctl.sh ]; then
+  source /etc/profile.d/etcdctl.sh;
+fi
+
 ROLE_NAME="$(etcdctl get /klam-ssh/config/role-name)"
 ENCRYPTION_ID="$(etcdctl get /klam-ssh/config/encryption-id)"
 ENCRYPTION_KEY="$(etcdctl get /klam-ssh/config/encryption-key)"

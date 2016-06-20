@@ -25,7 +25,7 @@ etcd-set /images/splunk                 "index.docker.io/adobeplatform/docker-sp
 
 etcd-set /bootstrap.service/images-bastion-bootstrapped true
 
-etcd-set /images/klam-ssh               "index.docker.io/adobecloudops/klam-ssh:latest"
+etcd-set /images/klam-ssh               "index.docker.io/behance/klam-ssh:v1"
 
 ######################
 #      SERVICES

@@ -139,7 +139,7 @@ function optional-units() {
 
   for service in $(etcd-get /environment/services)
   do
-      servicedir=${SCRIPTDIR}/${VERSION}/opt/${service}
+      servicedir=${SCRIPTDIR}/${VERSION}/opt/${service}/fleet
       if [[ ! -d $servicedir ]]; then
           continue
       fi

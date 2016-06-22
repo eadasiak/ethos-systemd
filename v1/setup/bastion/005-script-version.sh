@@ -1,1 +1,0 @@
-../leader/005-script-version.sh

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 # Source the etcd
 if [ -f /etc/profile.d/etcdctl.sh ]; then

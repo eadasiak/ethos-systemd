@@ -16,12 +16,7 @@ echo "-------Leader node, beginning writing all default values to etcd-------"
 etcd-set /bootstrap.service/images-base-bootstrapped true
 
 etcd-set /images/secrets-downloader     "index.docker.io/behance/docker-aws-secrets-downloader:latest"
-<<<<<<< HEAD
-etcd-set /images/ecr-login              "index.docker.io/behance/ecr-login:latest"
-etcd-set /images/splunk                 "index.docker.io/adobeplatform/docker-splunk:latest"
 etcd-set /images/klam-ssh               "index.docker.io/behance/klam-ssh:v1"
-=======
->>>>>>> adobe-platform/master
 
 etcd-set /bootstrap.service/images-control-bootstrapped true
 

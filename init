@@ -144,9 +144,19 @@ function optional-units() {
           continue
       fi
       for unit in $(ls $servicedir|grep -e '.service$\|.timer$')
-      do
+        do
+        # skip control units on non-control leader nodes (e.g., bastion)
+        if [[ $unit =~ control ]]; then
+          if [[ $NODE_ROLE = control ]]; then
+            submit-fleet-unit $servicedir/$unit
+            start-fleet-unit $unit
+          else
+            continue
+          fi
+        else
           submit-fleet-unit $servicedir/$unit
           start-fleet-unit $unit
+        fi
       done
   done
   echo "-------Done optional fleet submissions-------"

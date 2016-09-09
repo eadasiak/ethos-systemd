@@ -13,17 +13,8 @@ echo "-------Leader node, beginning writing all default values to etcd-------"
 
 # TODO: this overloads the machine
 
-<<<<<<< HEAD
-etcd-set /bootstrap.service/images-base-bootstrapped true
-
-etcd-set /images/secrets-downloader     "index.docker.io/behance/docker-aws-secrets-downloader:latest"
-etcd-set /images/klam-ssh               "index.docker.io/behance/klam-ssh:v1"
-
-etcd-set /bootstrap.service/images-control-bootstrapped true
-=======
 etcd-set /images/secrets-downloader     "index.docker.io/behance/docker-aws-secrets-downloader:v1.1.0"
 etcd-set /images/klam-ssh               "index.docker.io/behance/klam-ssh:v1"
->>>>>>> adobe-platform/master
 
 etcd-set /images/chronos                "index.docker.io/mesosphere/chronos:chronos-2.4.0-0.1.20150828104228.ubuntu1404-mesos-0.27.0-0.2.190.ubuntu1404"
 etcd-set /images/flight-director        "index.docker.io/behance/flight-director:a3240d5cec9e69e0a892fb2c8945f776ec455b2f"

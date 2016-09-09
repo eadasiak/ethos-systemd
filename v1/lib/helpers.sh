@@ -29,8 +29,6 @@ function start-fleet-unit() {
     sudo fleetctl start "$@"
     while [ $? != 0 ]; do sleep 1; sudo fleetctl start $@; done
 }
-<<<<<<< HEAD
-=======
 
 
 #
@@ -89,4 +87,3 @@ function uri_parser() {
     # return success
     return 0
 }
->>>>>>> adobe-platform/master

@@ -4,10 +4,12 @@ Requires=docker.service
 After=docker.service
 
 [Service]
+TimeoutStartSec=10m
 User=core
 Restart=on-failure
 Environment="IMAGE=etcdctl get /images/booster"
 
+ExecStartPre=/home/core/ethos-systemd/v1/opt/aqua/util/aqua-agent-health.sh
 ExecStartPre=/usr/bin/bash -c "[ -f /home/core/.dockercfg ] || exit 1"
 ExecStartPre=/usr/bin/bash -c "[ -f /opt/mesos/credentials ] || exit 1"
 ExecStartPre=/usr/bin/sh -c ". /etc/profile.d/etcdctl.sh && docker pull $($IMAGE)"
@@ -20,9 +22,13 @@ ExecStartPre=-/usr/bin/docker rm booster
 ExecStart=/usr/bin/sh -c ". /etc/profile.d/etcdctl.sh && /usr/bin/docker run \
   --name booster \
   --net=host \
+  -e BOOSTER_NO_PERSISTENCE=true \
+  -e BOOSTER_ENABLED=$(etcdctl get /booster/config/enabled) \
   -e BOOSTER_NODES=$(etcdctl ls /booster/nodes | cut -d'/' --complement -s -f-3 | tr '\n' ',') \
   -e BOOSTER_ROLES=mesos_agent \
   $($IMAGE)"
+
+ExecStop=-/usr/bin/docker stop booster
 
 [Install]
 WantedBy=multi-user.target

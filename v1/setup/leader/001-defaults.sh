@@ -13,31 +13,31 @@ echo "-------Leader node, beginning writing all default values to etcd-------"
 
 # TODO: this overloads the machine
 
+<<<<<<< HEAD
 etcd-set /bootstrap.service/images-base-bootstrapped true
 
 etcd-set /images/secrets-downloader     "index.docker.io/behance/docker-aws-secrets-downloader:latest"
 etcd-set /images/klam-ssh               "index.docker.io/behance/klam-ssh:v1"
 
 etcd-set /bootstrap.service/images-control-bootstrapped true
+=======
+etcd-set /images/secrets-downloader     "index.docker.io/behance/docker-aws-secrets-downloader:v1.1.0"
+etcd-set /images/klam-ssh               "index.docker.io/behance/klam-ssh:v1"
+>>>>>>> adobe-platform/master
 
 etcd-set /images/chronos                "index.docker.io/mesosphere/chronos:chronos-2.4.0-0.1.20150828104228.ubuntu1404-mesos-0.27.0-0.2.190.ubuntu1404"
-etcd-set /images/flight-director        "index.docker.io/behance/flight-director:latest"
+etcd-set /images/flight-director        "index.docker.io/behance/flight-director:a3240d5cec9e69e0a892fb2c8945f776ec455b2f"
 etcd-set /images/marathon               "index.docker.io/mesosphere/marathon:v0.15.1"
 etcd-set /images/mesos-master           "index.docker.io/mesosphere/mesos-master:0.27.0-0.2.190.ubuntu1404"
-etcd-set /images/zk-exhibitor           "index.docker.io/behance/docker-zk-exhibitor:latest"
-etcd-set /images/cfn-signal             "index.docker.io/behance/docker-cfn-bootstrap:latest"
+etcd-set /images/zk-exhibitor           "index.docker.io/behance/docker-zk-exhibitor:v1.0.0"
+etcd-set /images/cfn-signal             "index.docker.io/behance/docker-cfn-bootstrap:v1.0.0"
 etcd-set /images/jenkins                "index.docker.io/jenkins:1.651.1"
-etcd-set /images/booster                "index.docker.io/behance/booster:erl"
+etcd-set /images/booster                "index.docker.io/behance/booster:0.3"
+etcd-set /images/booster-queue          "index.docker.io/behance/booster-queue:0.1"
 
-etcd-set /bootstrap.service/images-proxy-bootstrapped true
-
-etcd-set /images/capcom                 "index.docker.io/behance/capcom:latest"
-etcd-set /images/capcom2                "index.docker.io/behance/capcom:latest"
+etcd-set /images/capcom                 "index.docker.io/behance/capcom:3ddcfe360a95adcf97d4e9f3a98f9e59057e55c6"
 etcd-set /images/proxy                  "index.docker.io/nginx:1.9.5"
-etcd-set /images/proxy-setup            "index.docker.io/behance/mesos-proxy-setup:latest"
 etcd-set /images/control-proxy          "index.docker.io/behance/apigateway:v0.0.1"
-
-etcd-set /bootstrap.service/images-worker-bootstrapped true
 
 etcd-set /images/mesos-slave            "index.docker.io/mesosphere/mesos-slave:0.27.0-0.2.190.ubuntu1404"
 
@@ -52,8 +52,8 @@ etcd-set /capcom/config/host                    127.0.0.1
 etcd-set /capcom/config/db-path                 ./capcom.db
 etcd-set /capcom/config/kv-store-server-address http://$CAPCOM_KV_ENDPOINT
 etcd-set /capcom/config/kv-ttl                  10
-etcd-set /capcom/config/log-level               "$CAPCOM_LOG_LEVEL"
-etcd-set /capcom/config/log-location            "$CAPCOM_LOG_LOCATION"
+etcd-set /capcom/config/log-level               "info"
+etcd-set /capcom/config/log-location            "stdout"
 etcd-set /capcom/config/port                    2002
 etcd-set /capcom/config/proxy                   nginx
 etcd-set /capcom/config/proxy-config-file       /etc/nginx/nginx.conf
@@ -79,10 +79,10 @@ etcd-set /flight-director/config/dockercfg-location file:///root/.dockercfg
 etcd-set /flight-director/config/debug false
 etcd-set /flight-director/config/event-interface ''
 etcd-set /flight-director/config/event-port 2001
-etcd-set /flight-director/config/fixtures "$FLIGHT_DIRECTOR_FIXTURES"
+etcd-set /flight-director/config/fixtures "prod"
 etcd-set /flight-director/config/kv-server http://localhost:2379
-etcd-set /flight-director/config/log-level "$FLIGHT_DIRECTOR_LOG_LEVEL"
-etcd-set /flight-director/config/log-location "$FLIGHT_DIRECTOR_LOG_LOCATION"
+etcd-set /flight-director/config/log-level "info"
+etcd-set /flight-director/config/log-location "stdout"
 etcd-set /flight-director/config/log-marathon-api-calls false
 etcd-set /flight-director/config/marathon-master "$FLIGHT_DIRECTOR_MARATHON_ENDPOINT"
 etcd-set /flight-director/config/mesos-master "$FLIGHT_DIRECTOR_MESOS_ENDPOINT"
@@ -91,7 +91,8 @@ etcd-set /flight-director/config/allow-marathon-unverified-tls false
 etcd-set /flight-director/config/mesos-master-protocol http
 etcd-set /flight-director/config/authorizer-type airlock
 etcd-set /flight-director/config/iam-role-label com.swipely.iam-docker.iam-profile
-
+etcd-set /flight-director/config/scaler-protocol http
+etcd-set /flight-director/config/scaler-endpoint localhost:2042
 
 ######################
 #     ZOOKEEPER
@@ -113,6 +114,12 @@ etcd-set /zookeeper/config/password             "password"
 
 etcd-set /mesos/config/username ethos
 
+######################
+#       BOOSTER
+######################
+
+etcd-set /booster/config/enabled 0
+etcd-set /booster/config/nopersistence 1
 
 ######################
 #      SERVICES

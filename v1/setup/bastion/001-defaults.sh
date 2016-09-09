@@ -13,6 +13,7 @@ echo "-------Bastion node, beginning writing all default values to etcd-------"
 
 # TODO: this overloads the machine
 
+<<<<<<< HEAD
 etcd-set /bootstrap.service/images-base-bootstrapped true
 
 etcd-set /images/secrets-downloader     "index.docker.io/behance/docker-aws-secrets-downloader:latest"
@@ -20,6 +21,11 @@ etcd-set /images/klam-ssh               "index.docker.io/behance/klam-ssh:v1"
 
 etcd-set /bootstrap.service/images-bastion-bootstrapped true
 
+=======
+etcd-set /images/secrets-downloader     "index.docker.io/behance/docker-aws-secrets-downloader:latest"
+etcd-set /images/klam-ssh               "index.docker.io/behance/klam-ssh:v1"
+
+>>>>>>> adobe-platform/master
 # Add any bastion-specific etcd keys here
 
 

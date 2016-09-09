@@ -12,6 +12,7 @@ Restart=always
 RestartSec=10s
 
 # Get CoreOS environmental variables
+EnvironmentFile=/etc/environment
 Environment="IMAGE=etcdctl get /images/fluentd"
 
 ExecStartPre=-/usr/bin/docker kill fluentd-router

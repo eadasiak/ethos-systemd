@@ -4,6 +4,8 @@ if [[ -f /etc/profile.d/etcdctl.sh ]];
   then source /etc/profile.d/etcdctl.sh;
 fi
 
+source /etc/environment
+
 IMAGE=$(etcdctl get /images/fluentd)
 FLUENTD_ROUTER_PORT=$(etcdctl get /logging/config/fluentd-router-port)
 FLUENTD_MONITOR_PORT=$(etcdctl get /logging/config/fluentd-monitor-port)

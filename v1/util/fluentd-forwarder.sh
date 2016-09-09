@@ -4,6 +4,8 @@ if [[ -f /etc/profile.d/etcdctl.sh ]];
   then source /etc/profile.d/etcdctl.sh;
 fi
 
+source /etc/environment
+
 IMAGE=$(etcdctl get /images/fluentd)
 FLUENTD_FORWARDER_PORT=$(etcdctl get /logging/config/fluentd-router-port)
 FLUENTD_MONITOR_PORT=$(etcdctl get /logging/config/fluentd-monitor-port)
@@ -13,7 +15,7 @@ FLUENTD_MONITOR_PORT=$(etcdctl get /logging/config/fluentd-monitor-port)
   -p $FLUENTD_FORWARDER_PORT:5170 \
   -p $FLUENTD_MONITOR_PORT:24220 \
   -e FLUENTD_CONF=fluentd-forwarder.conf \
-  -e FLUENTD_ROUTER_LB=$(etcdctl get /logging/config/fluentd-router-lb) \
+  -e FLUENTD_ROUTER_LB=$FLUENTD_INTERNAL_ELB \
   -e FLUENTD_ROUTER_PORT=$(etcdctl get /logging/config/fluentd-router-port) \
   -e FLUENTD_ETHOSPLUGIN_CACHE_SIZE=$(etcdctl get /logging/config/fluentd-ethosplugin-cache-size) \
   -e FLUENTD_ETHOSPLUGIN_CACHE_TTL=$(etcdctl get /logging/config/fluentd-ethosplugin-cache-ttl) \
